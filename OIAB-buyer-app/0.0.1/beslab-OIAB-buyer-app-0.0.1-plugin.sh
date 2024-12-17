@@ -77,7 +77,7 @@ function install_docker_compose() {
 }
 
 
-function __beslab_install_buyer-app() {
+function __beslab_install_OIAB-buyer-app() {
 
 	local env_file="$BESLAB_OIAB_BUYER_APP_DIR/.env.default"
     install_docker
@@ -112,4 +112,24 @@ function __beslab_install_buyer-app() {
 	__besman_echo_yellow "Building buyer app"
 	sudo docker-compose up --build -d
 	cd "$HOME" || return 1
+}
+
+function __beslab_uninstall_OIAB-buyer-app() {
+
+	__besman_echo_no_colour "Stopping and removing $BESLAB_OIAB_BUYER_APP"
+	cd "$BESLAB_OIAB_BUYER_APP_DIR" || return 1
+	sudo docker compose down --rmi all --volumes >/dev/null 2>&1
+	cd "$HOME" || return 1
+}
+
+function __beslab_plugininfo_OIAB-buyer-ui()
+{
+	__besman_echo_no_colour "################ Plugin: OIAB-buyer-app ################"
+	__besman_echo_no_colour "-------------------------------------------------------"
+	__besman_echo_no_colour ""
+	__besman_echo_no_colour "This plugin installs and runs the app which contain the business logic of OSSVerse marketplace ui."
+	__besman_echo_no_colour "It will receive requests from the marketplace ui, running on $BESLAB_IP_ADDRESS:$BESLAB_OIAB_BUYER_UI_PORT".
+	__besman_echo_no_colour "It will send requests to the protocol server running on $BESLAB_IP_ADDRESS:5001"
+	__besman_echo_yellow "Buyer app is running on port $BESLAB_OIAB_BUYER_APP_PORT"
+
 }

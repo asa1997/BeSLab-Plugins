@@ -48,7 +48,12 @@ function install_docker() {
 	fi
 }
 
-function __beslab_install_buyer-ui() {
+# function __beslab_init_OIAB-buyer-ui()
+# {
+	
+# }
+
+function __beslab_install_OIAB-buyer-ui() {
 	install_docker
 	if [[ -d $BESLAB_OIAB_BUYER_UI_DIR ]]; then
 		__besman_echo_white "Buyer ui code found"
@@ -81,7 +86,7 @@ function __beslab_install_buyer-ui() {
 	cd "$HOME" || return 1
 }
 
-function __beslab_uninstall_buyer-ui()
+function __beslab_uninstall_OIAB-buyer-ui()
 {
 	__besman_echo_yellow "Stopping and removing buyer ui"
 	sudo docker stop oiab-buyer-ui
@@ -90,4 +95,15 @@ function __beslab_uninstall_buyer-ui()
 	if [[ -d $BESLAB_OIAB_BUYER_UI_DIR ]]; then
 		rm -rf "$BESLAB_OIAB_BUYER_UI_DIR"
 	fi
+}
+
+function __beslab_plugininfo_OIAB-buyer-ui()
+{
+	__besman_echo_no_colour "################ Plugin: OIAB-buyer-ui ################"
+	__besman_echo_no_colour "-------------------------------------------------------"
+	__besman_echo_no_colour ""
+	__besman_echo_no_colour "This plugin installs and runs the OSSVerse marketplace ui."
+	__besman_echo_no_colour "It will send requests to the buyer app, running on $BESLAB_IP_ADDRESS:$BESLAB_OIAB_BUYER_APP_PORT"
+	__besman_echo_yellow "Marketplace running on $BESLAB_IP_ADDRESS:$BESLAB_OIAB_BUYER_UI_PORT"
+
 }
