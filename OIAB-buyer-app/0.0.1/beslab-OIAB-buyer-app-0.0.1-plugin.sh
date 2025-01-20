@@ -122,14 +122,34 @@ function __beslab_uninstall_OIAB-buyer-app() {
 	cd "$HOME" || return 1
 }
 
-function __beslab_plugininfo_OIAB-buyer-ui()
+function __beslab_plugininfo_OIAB-buyer-app()
 {
-	__besman_echo_no_colour "################ Plugin: OIAB-buyer-app ################"
-	__besman_echo_no_colour "-------------------------------------------------------"
-	__besman_echo_no_colour ""
-	__besman_echo_no_colour "This plugin installs and runs the app which contain the business logic of OSSVerse marketplace ui."
-	__besman_echo_no_colour "It will receive requests from the marketplace ui, running on $BESLAB_IP_ADDRESS:$BESLAB_OIAB_BUYER_UI_PORT".
-	__besman_echo_no_colour "It will send requests to the protocol server running on $BESLAB_IP_ADDRESS:5001"
-	__besman_echo_yellow "Buyer app is running on port $BESLAB_OIAB_BUYER_APP_PORT"
+	cat <<EOF
+### Plugin Information
+
+#### Description:
+
+This plugin acts as a backend-end for the buyer UI. It receives requests from the buyer ui and sends it to the bap protocol server.
+
+#### Version:
+
+latest
+
+#### Default Port:
+
+8000
+
+#### Dependencies:
+
+- docker
+- docker-compose
+
+#### Usage:
+
+To use the plugin, run the following command:
+
+bli install plugin OIAB-buyer-app 0.0.1
+
+EOF
 
 }
