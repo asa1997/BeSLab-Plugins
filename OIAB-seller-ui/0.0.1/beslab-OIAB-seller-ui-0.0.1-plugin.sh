@@ -101,10 +101,31 @@ function __beslab_uninstall_OIAB-seller-ui()
 
 function __beslab_plugininfo_OIAB-seller-ui()
 {
-	__besman_echo_no_colour "################ Plugin: OIAB-seller-ui ################"
-	__besman_echo_no_colour "-------------------------------------------------------"
-	__besman_echo_no_colour ""
-	__besman_echo_no_colour "This plugin installs and runs the OASP seller ui"
-	__besman_echo_yellow "The ui running on $BESLAB_IP_ADDRESS:$BESLAB_SELLER_UI_PORT"
+cat <<EOF
+### Plugin Information
+
+#### Description:
+
+This plugin installs the seller ui.
+
+#### Version:
+
+latest
+
+#### Default Port:
+
+8002
+
+#### Dependencies:
+
+- docker
+
+#### Usage:
+
+To use the plugin, run the following command:
+
+bli install plugin OIAB-seller-ui 0.0.1
+
+EOF
 
 }

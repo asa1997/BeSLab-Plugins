@@ -122,7 +122,7 @@ latest
 
 To use the plugin, run the following command:
 
-bli install plugin OIAB-buyer-app 0.0.1
+bli install plugin OIAB-buyer-ui 0.0.1
 
 EOF
 

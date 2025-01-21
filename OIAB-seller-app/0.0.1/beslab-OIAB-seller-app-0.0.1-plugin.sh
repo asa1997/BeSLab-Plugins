@@ -295,11 +295,33 @@ function __beslab_uninstall_OIAB-seller-app()
 
 function __beslab_plugininfo_OIAB-seller-app()
 {
-	__besman_echo_no_colour "################ Plugin: OIAB-seller-app ################"
-	__besman_echo_no_colour "-------------------------------------------------------"
-	__besman_echo_no_colour ""
-	__besman_echo_no_colour "This plugin installs the following:"
-    __besman_echo_no_colour "1. seller app: Running on port 3008"
-    __besman_echo_no_colour "2. seller api: Takes the request from the bpp client. Running on port 3001."
+	cat <<EOF
+### Plugin Information
+
+#### Description:
+
+This plugin acts as a backend-end for the seller UI. It handles creation and storing of products.
+
+#### Version:
+
+latest
+
+#### Default Port:
+
+3008
+
+#### Dependencies:
+
+- docker
+- docker-compose
+
+#### Usage:
+
+To use the plugin, run the following command:
+
+bli install plugin OIAB-seller-app 0.0.1
+
+EOF
+
 
 }
