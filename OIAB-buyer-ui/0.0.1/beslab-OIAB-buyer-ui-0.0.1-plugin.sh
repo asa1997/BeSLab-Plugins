@@ -97,6 +97,18 @@ function __beslab_uninstall_OIAB-buyer-ui()
 	fi
 }
 
+function __beslab_validate_OIAB-buyer-ui()
+{
+	__besman_echo_yellow "Validating buyer ui"
+	curl -s -o /dev/null -w "%{http_code}" "$BESLAB_IP_ADDRESS:$BESLAB_OIAB_BUYER_UI_PORT"
+	if [ $? -ne 0 ]; then
+		__besman_echo_red "Buyer ui is not running"
+		return 1
+	fi
+	__besman_echo_green "Buyer ui running successfully"
+	return 0
+}
+
 function __beslab_plugininfo_OIAB-buyer-ui()
 {
 	cat <<EOF
