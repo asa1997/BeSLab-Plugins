@@ -69,7 +69,7 @@ function install_docker_compose() {
 		sudo chmod +x /usr/local/bin/docker-compose
 
 		__besman_echo_yellow "Docker Compose installed successfully!"
-		docker-compose --version
+		docker compose --version
 		if [ $? -ne 0 ]; then
 			__besman_echo_red "Failed to download Docker Compose."
 			return 1
@@ -124,17 +124,46 @@ function __beslab_uninstall_OIAB-network()
     fi
 }
 
-function __beslab_plugininfo_OIAB-buyer-ui()
+function __beslab_plugininfo_OIAB-network()
 {
-	__besman_echo_no_colour "################ Plugin: OIAB-network ################"
-	__besman_echo_no_colour "-------------------------------------------------------"
-	__besman_echo_no_colour ""
-	__besman_echo_no_colour "This plugin installs the following:"
-    __besman_echo_no_colour "1. bap client: Takes the requests from buyer app and send it to the network. Running on port 5001."
-    __besman_echo_no_colour "2. bap network: Takes the request from the network and sends it to the buyer app. Running on port 5002."
-	__besman_echo_no_colour "3. registry: Stores the list of all the participants in the network and their metadata. Runs on port $BESLAB_IP_ADDRESS:3030."
-	__besman_echo_no_colour "4. gateway: Broadcasts the search requests to all the matching sellers in the network. Runs on port 4030."
-	__besman_echo_no_colour "5. bpp network: Takes in the requests from the network and sends it to seller app. Runs on port 6002."
-	__besman_echo_no_colour "6. bpp client: Takes in the requests from the seller app and sends it bpp network. Runs on port 6001."
+	cat <<EOF
+### Plugin Information
+
+#### Description:
+
+This plugin sets up the whole OIAB network. It installs the following components:
+
+- registry
+- gateway
+- bap client
+- bap network
+- bpp client
+- bpp network
+
+#### Version:
+
+latest
+
+#### Default Port:
+
+- registry: 3030
+- gateway: 4030
+- bap client: 5001
+- bap network: 5002
+- bpp client: 6001
+- bpp network: 6002
+
+#### Dependencies:
+
+- docker
+- docker-compose
+
+#### Usage:
+
+To use the plugin, run the following command:
+
+bli install plugin OIAB-network 0.0.1
+
+EOF
 
 }

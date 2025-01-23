@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#!/bin/bash
+
 function install_docker() {
 
 	__besman_echo_no_colour "Checking if Docker is installed..."
@@ -48,63 +50,63 @@ function install_docker() {
 	fi
 }
 
-# function __beslab_init_OIAB-buyer-ui()
+# function __beslab_init_OIAB-seller-ui()
 # {
 	
 # }
 
-function __beslab_install_OIAB-buyer-ui() {
+function __beslab_install_OIAB-seller-ui() {
 	install_docker
-	if [[ -d $BESLAB_OIAB_BUYER_UI_DIR ]]; then
-		__besman_echo_white "Buyer ui code found"
+	if [[ -d $BESLAB_SELLER_UI_DIR ]]; then
+		__besman_echo_white "Seller ui code found"
 	else
-		__besman_echo_white "Cloning source code repo from $BESLAB_ORG/$BESLAB_OIAB_BUYER_UI"
-		__besman_repo_clone "$BESLAB_ORG" "$BESLAB_OIAB_BUYER_UI" "$BESLAB_OIAB_BUYER_UI_DIR" || return 1
+		__besman_echo_white "Cloning source code repo from $BESLAB_ORG/$BESLAB_SELLER_UI_SOURCE_REPO"
+		__besman_repo_clone "$BESLAB_ORG" "$BESLAB_SELLER_UI_SOURCE_REPO" "$BESLAB_SELLER_UI_DIR" || return 1
 	fi
-	cd "$BESLAB_OIAB_BUYER_UI_DIR" || return 1
-	__besman_echo_white "Installing $BESLAB_OIAB_BUYER_UI"
+	cd "$BESLAB_SELLER_UI_DIR" || return 1
+	__besman_echo_white "Installing $BESLAB_SELLER_UI_SOURCE_REPO"
 	__besman_echo_yellow "Building OIAB buyer ui"
 
 	# Check Dockerfile port
-	if grep -q "EXPOSE $BESLAB_OIAB_BUYER_UI_PORT" Dockerfile; then
-		__besman_echo_yellow "Port $BESLAB_OIAB_BUYER_UI_PORT already exposed in Dockerfile"
+	if grep -q "EXPOSE $BESLAB_SELLER_UI_PORT" Dockerfile; then
+		__besman_echo_yellow "Port $BESLAB_SELLER_UI_PORT already exposed in Dockerfile"
 	else
-		sed -i "s/EXPOSE 80/EXPOSE $BESLAB_OIAB_BUYER_UI_PORT/g" Dockerfile
-		__besman_echo_white "Updated Dockerfile port to $BESLAB_OIAB_BUYER_UI_PORT"
+		sed -i "s/EXPOSE 80/EXPOSE $BESLAB_SELLER_UI_PORT/g" Dockerfile
+		__besman_echo_white "Updated Dockerfile port to $BESLAB_SELLER_UI_PORT"
 	fi
 
 	# Check nginx.conf port
-	if grep -q "listen $BESLAB_OIAB_BUYER_UI_PORT;" nginx.conf; then
-		__besman_echo_yellow "Port $BESLAB_OIAB_BUYER_UI_PORT already configured in nginx.conf"
+	if grep -q "listen $BESLAB_SELLER_UI_PORT;" nginx.conf; then
+		__besman_echo_yellow "Port $BESLAB_SELLER_UI_PORT already configured in nginx.conf"
 	else
-		sed -i "s/listen 80;/listen $BESLAB_OIAB_BUYER_UI_PORT;/g" nginx.conf
-		__besman_echo_white "Updated nginx.conf port to $BESLAB_OIAB_BUYER_UI_PORT"
+		sed -i "s/listen 80;/listen $BESLAB_SELLER_UI_PORT;/g" nginx.conf
+		__besman_echo_white "Updated nginx.conf port to $BESLAB_SELLER_UI_PORT"
 	fi
 
-	sudo docker build --build-arg VITE_API_BASE_URL="$BESLAB_IP_ADDRESS:$BESLAB_OIAB_BUYER_APP_PORT" -t oiab-buyer-ui .
-	sudo docker run -d --name oiab-buyer-ui -p $BESLAB_OIAB_BUYER_UI_PORT:$BESLAB_OIAB_BUYER_UI_PORT oiab-buyer-ui
+	sudo docker build --build-arg VITE_API_BASE_URL="$BESLAB_IP_ADDRESS:3008" -t oiab-seller-ui .
+	sudo docker run -d --name oiab-seller-ui -p $BESLAB_SELLER_UI_PORT:$BESLAB_SELLER_UI_PORT oiab-seller-ui
 	cd "$HOME" || return 1
 }
 
-function __beslab_uninstall_OIAB-buyer-ui()
+function __beslab_uninstall_OIAB-seller-ui()
 {
 	__besman_echo_yellow "Stopping and removing buyer ui"
-	sudo docker stop oiab-buyer-ui
-	sudo docker image rm oiab-buyer-ui
+	sudo docker stop oiab-seller-ui
+	sudo docker image rm oiab-seller-ui
 
-	if [[ -d $BESLAB_OIAB_BUYER_UI_DIR ]]; then
-		rm -rf "$BESLAB_OIAB_BUYER_UI_DIR"
+	if [[ -d $BESLAB_SELLER_UI_DIR ]]; then
+		rm -rf "$BESLAB_SELLER_UI_DIR"
 	fi
 }
 
-function __beslab_plugininfo_OIAB-buyer-ui()
+function __beslab_plugininfo_OIAB-seller-ui()
 {
-	cat <<EOF
+cat <<EOF
 ### Plugin Information
 
 #### Description:
 
-This plugin installs the marketplace/buyer ui.
+This plugin installs the seller ui.
 
 #### Version:
 
@@ -112,7 +114,7 @@ latest
 
 #### Default Port:
 
-8001
+8002
 
 #### Dependencies:
 
@@ -122,7 +124,7 @@ latest
 
 To use the plugin, run the following command:
 
-bli install plugin OIAB-buyer-ui 0.0.1
+bli install plugin OIAB-seller-ui 0.0.1
 
 EOF
 
