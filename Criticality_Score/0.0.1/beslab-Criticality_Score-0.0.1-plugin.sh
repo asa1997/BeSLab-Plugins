@@ -28,7 +28,7 @@ function __beslab_plugininfo_Criticality_Score()
 
 #### Description:
 
-This plugin is to install criticality score utility to assess the github repository score.
+This plugin is to install criticality score utility to assess how critical the project under test.
 
 #### Version:
 

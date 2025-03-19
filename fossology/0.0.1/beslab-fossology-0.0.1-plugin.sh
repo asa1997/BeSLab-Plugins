@@ -77,7 +77,7 @@ function install_docker_compose() {
 }
 
 
-function __beslab_install_fossology() {
+function __beslab_install_Fossology() {
 
     install_docker
     install_docker_compose || return 1
@@ -91,7 +91,7 @@ function __beslab_install_fossology() {
     docker start fossology
 }
 
-function __beslab_uninstall_fossology() {
+function __beslab_uninstall_Fossology() {
 
 	__besman_echo_no_colour "Stopping and removing $BESLAB_OIAB_BUYER_APP"
 	cd "$BESLAB_OIAB_BUYER_APP_DIR" || return 1
@@ -102,7 +102,7 @@ function __beslab_uninstall_fossology() {
 	cd "$HOME" || return 1
 }
 
-function __beslab_plugininfo_fossology()
+function __beslab_plugininfo_Fossology()
 {
 	cat <<EOF
 ### Plugin Information
@@ -120,7 +120,7 @@ latest
 
 To use the plugin, run the following command:
 
-bli install plugin fossology 0.0.1
+bli install plugin Fossology 0.0.1
 
 EOF
 

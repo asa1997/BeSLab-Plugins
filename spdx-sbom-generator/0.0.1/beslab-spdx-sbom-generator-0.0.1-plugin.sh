@@ -77,39 +77,39 @@ function install_docker_compose() {
 }
 
 
-function __beslab_install_sonarqube() {
+function __beslab_install_Spdx_Sbom_Generator() {
 
     install_docker
     install_docker_compose || return 1
 
-    if [ "$(docker ps -aq -f name=sonarqube)" ];then
-       docker stop sonarqube
-       docker container rm --force sonarqube
+    if [ "$(docker ps -aq -f name=spdx_sbom_generator)" ];then
+       docker stop spdx_sbom_generator
+       docker container rm --force spdx_sbom_genrator
     fi
 
-    docker create --name sonarqube -p 9000:9000 sonarqube
-    docker start sonarqube
+    docker create --name spdx_sbom_generator -p 80:80 spdx/spdx-sbom-generator
+    docker start spdx_sbom_generator
 }
 
-function __beslab_uninstall_sonarqube() {
+function __beslab_uninstall_Spdx_Sbom_Generator() {
 
 	__besman_echo_no_colour "Stopping and removing $BESLAB_OIAB_BUYER_APP"
 	cd "$BESLAB_OIAB_BUYER_APP_DIR" || return 1
-	if [ "$(docker ps -aq -f name=sonarqube)" ];then
-          docker stop sonarqube
-          docker container rm --force sonarqube
+	if [ "$(docker ps -aq -f name=spdx_sbom_generator)" ];then
+          docker stop spdx_sbom_generator
+          docker container rm --force spdx_sbom_generator
         fi
 	cd "$HOME" || return 1
 }
 
-function __beslab_plugininfo_sonarqube()
+function __beslab_plugininfo_Spdx_Sbom_Generator()
 {
 	cat <<EOF
 ### Plugin Information
 
 #### Description:
 
-This plugin is to install fossology to assess the github repository licensing.
+This plugin is to install spdx-sbom-generator to get the SBOM of OSS.
 
 #### Version:
 
@@ -120,7 +120,7 @@ latest
 
 To use the plugin, run the following command:
 
-bli install plugin fossology 0.0.1
+bli install plugin Spdx_Sbom_Generator 0.0.1
 
 EOF
 

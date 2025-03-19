@@ -77,7 +77,7 @@ function install_docker_compose() {
 }
 
 
-function __beslab_install_sonarqube() {
+function __beslab_install_SonarQube() {
 
     install_docker
     install_docker_compose || return 1
@@ -91,7 +91,7 @@ function __beslab_install_sonarqube() {
     docker start sonarqube
 }
 
-function __beslab_uninstall_sonarqube() {
+function __beslab_uninstall_SonarQube() {
 
 	__besman_echo_no_colour "Stopping and removing $BESLAB_OIAB_BUYER_APP"
 	cd "$BESLAB_OIAB_BUYER_APP_DIR" || return 1
@@ -102,14 +102,14 @@ function __beslab_uninstall_sonarqube() {
 	cd "$HOME" || return 1
 }
 
-function __beslab_plugininfo_sonarqube()
+function __beslab_plugininfo_SonarQube()
 {
 	cat <<EOF
 ### Plugin Information
 
 #### Description:
 
-This plugin is to install fossology to assess the github repository licensing.
+This plugin is to install SonarQube to perform static code analysis.
 
 #### Version:
 
@@ -120,7 +120,7 @@ latest
 
 To use the plugin, run the following command:
 
-bli install plugin fossology 0.0.1
+bli install plugin SonarQube 0.0.1
 
 EOF
 
