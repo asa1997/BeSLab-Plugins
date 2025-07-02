@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function __beslab_install_Criticality_Score() {
+function __beslab_install_PIA-CriticalityScore() {
 
     if ! [ -x "$(command -v go)" ];then
          sudo snap install go --classic
@@ -13,7 +13,7 @@ function __beslab_install_Criticality_Score() {
 
 }
 
-function __beslab_uninstall_Criticality_Score() {
+function __beslab_uninstall_PIA-CriticalityScore() {
 
 	__besman_echo_no_colour "Stopping and removing $BESLAB_OIAB_BUYER_APP"
 	cd "$BESLAB_OIAB_BUYER_APP_DIR" || return 1
@@ -21,7 +21,7 @@ function __beslab_uninstall_Criticality_Score() {
 	cd "$HOME" || return 1
 }
 
-function __beslab_plugininfo_Criticality_Score()
+function __beslab_plugininfo_PIA-CriticalityScore()
 {
 	cat <<EOF
 ### Plugin Information
@@ -39,7 +39,7 @@ latest
 
 To use the plugin, run the following command:
 
-bli install plugin Criticality_Score 0.0.1
+bli install plugin PIA-CriticalityScore 0.0.1
 
 EOF
 
