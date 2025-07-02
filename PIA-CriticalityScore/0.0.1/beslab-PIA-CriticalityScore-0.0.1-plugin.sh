@@ -4,7 +4,7 @@ function __beslab_install_PIA-CriticalityScore() {
 
     if ! [ -x "$(command -v go)" ];then
          sudo snap install go --classic
-	 export GPATH=$HOME/go
+	 export GOPATH=$HOME/go
 	 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
     fi
